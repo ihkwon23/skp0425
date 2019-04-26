@@ -1,6 +1,7 @@
 package step1;
 
-public class ConsoleStatement {
+public class ConsoleStatement implements Statement {
+    @Override
     public String statement(Customer customer) {
         return statementHeader(customer)
                 + statementBody(customer)

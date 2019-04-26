@@ -135,9 +135,25 @@ public class CustomerTest {
                 "You earned 14 frequent renter pointers",statement);
     }
 
+    class MovieFactory {
+        private Movie createMovie(int priceCode, String title) {
+//            if ( priceCode == Movie.REGULAR )
+//                return new RegularMovie(title);
+//            if ( priceCode == Movie.NEW_RELEASE )
+//                return new NewReleaseMovie(title);
+//            if ( priceCode == Movie.CHILDRENS )
+//                return new ChildrensMovie(title);
+
+            return new Movie(title, priceCode);
+        }
+    }
+
     private Rental createRentalFor(int priceCode, int daysRented) {
+        MovieFactory movieFactory = new MovieFactory();
+
         String title = null;
-        Movie movie = new Movie(title, priceCode);
+        Movie movie = movieFactory.createMovie(priceCode, title);
+
         return new Rental(movie, daysRented);
     }
 
