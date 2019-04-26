@@ -9,15 +9,17 @@ public class CustomerTest {
 
     public static final int RENTED_FOR_THREE_DAYS = 3;
     private Customer customer;
+    private ConsoleStatement consoleStatement;
 
     @Before
     public void setUp() throws Exception {
         customer = new Customer(null);
+        consoleStatement = new ConsoleStatement();
     }
 
     @Test
     public void statement_for_noRental() { //
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "Amount owed is 0.0\n" +
@@ -29,7 +31,7 @@ public class CustomerTest {
         int daysRented = 2;
         customer.addRental(createRentalFor(Movie.REGULAR, daysRented));
 
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "\t2.0(null)\n" +
@@ -41,7 +43,7 @@ public class CustomerTest {
     public void statement_for_regularMovie_daysRented_is_more_than_2_days() { //
         customer.addRental(createRentalFor(Movie.REGULAR, RENTED_FOR_THREE_DAYS));
 
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "\t3.5(null)\n" +
@@ -53,7 +55,7 @@ public class CustomerTest {
     public void statement_for_newReleaseMovie_daysRented_is_lessThan_2_days() { //
         customer.addRental(createRentalFor(Movie.NEW_RELEASE, 1));
 
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "\t3.0(null)\n" +
@@ -65,7 +67,7 @@ public class CustomerTest {
     public void statement_for_newReleaseMovie_daysRented_is_moreThan_1_day() { //
         customer.addRental(createRentalFor(Movie.NEW_RELEASE, 2));
 
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "\t6.0(null)\n" +
@@ -77,7 +79,7 @@ public class CustomerTest {
     public void statement_for_ChildrensMovie_daysRented_is_less_than_four_days() { //
         customer.addRental(createRentalFor(Movie.CHILDRENS, 3));
 
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "\t1.5(null)\n" +
@@ -89,7 +91,7 @@ public class CustomerTest {
     public void statement_for_ChildrensMovie_daysRented_is_more_than_three_days() { //
         customer.addRental(createRentalFor(Movie.CHILDRENS, 4));
 
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "\t3.0(null)\n" +
@@ -114,7 +116,7 @@ public class CustomerTest {
         customer.addRental(createRentalFor(Movie.CHILDRENS, 3));
         customer.addRental(createRentalFor(Movie.CHILDRENS, 4));
 
-        String statement = customer.statement();
+        String statement = consoleStatement.statement(customer);
 
         assertEquals("Rental Record for null\n" +
                 "\t2.0(null)\n" +
